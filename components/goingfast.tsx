@@ -49,7 +49,7 @@ const products = [
 
 export default function GoingFastSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-8 font-sans">
+    <section className=" mx-auto px-4 py-8 font-sans">
       {/* Section Header */}
       <div className="border-b border-gray-200 pb-3 mb-6">
         <h2 className="text-2xl font-bold text-gray-900 inline-block relative pb-2 after:content-[''] after:absolute after:bottom-[-13px] after:left-0 after:w-full after:h-[2px] after:bg-pink-600">
@@ -58,7 +58,7 @@ export default function GoingFastSection() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
         {products.map((product) => (
           <div 
             key={product.id} 
