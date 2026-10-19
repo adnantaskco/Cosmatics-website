@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import Image from "next/image"
 
@@ -21,7 +22,7 @@ const categories: Category[] = [
     id: "2",
     name: "K-BEAUTY",
     productCount: "578 products",
-    imageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=400&auto=format&fit=crop",
+    imageUrl: "https://i.pinimg.com/736x/0d/de/1f/0dde1fecad3e302ee1b142e7c64d36f6.jpg",
     categoryUrl: "/",
   },
   {
@@ -56,7 +57,7 @@ const categories: Category[] = [
     id: "7",
     name: "HAIR",
     productCount: "115 products",
-    imageUrl: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=400&auto=format&fit=crop",
+    imageUrl: "https://i.pinimg.com/1200x/71/5d/eb/715debd6bb2608ac22cfe3077c4d6600.jpg",
     categoryUrl: "/",
   },
   {
@@ -70,43 +71,41 @@ const categories: Category[] = [
 
 export function ShopByCategory() {
   return (
-    <section className="w-full container mx-auto px-4 md:px-8 lg:px-16 py-12 bg-gradient-to-b from-neutral-50/50 to-white font-sans">
+    <section className="w-full container mx-auto px-2 md:px-8 lg:px-16 py-8 md:py-12 bg-gradient-to-b from-neutral-50/50 to-white font-sans">
       {/* Section Header with Accent Bar */}
-      <div className="flex flex-col items-center mb-10 text-center">
-        <span className="text-xs font-bold tracking-widest text-[#D90452] uppercase mb-1">
+      <div className="flex flex-col items-center mb-6 md:mb-10 text-center">
+        <span className="text-[10px] md:text-xs font-bold tracking-widest text-[#D90452] uppercase mb-1">
           Curated Collections
         </span>
-        <h2 className="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-r from-neutral-900 to-rose-900 bg-clip-text text-transparent uppercase">
+        <h2 className="text-lg md:text-2xl font-bold tracking-tight bg-gradient-to-r from-neutral-900 to-rose-900 bg-clip-text text-transparent uppercase">
           Shop By Category
         </h2>
-        <div className="w-12 h-1 bg-[#D90452] rounded-full mt-3"></div>
+        <div className="w-10 md:w-12 h-1 bg-[#D90452] rounded-full mt-2 md:mt-3"></div>
       </div>
 
-      {/* Category Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6 text-center">
+      {/* Category Grid: 4 columns on mobile, 8 columns on desktop */}
+      <div className="grid grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-4 lg:gap-6 text-center">
         {categories.map((cat) => (
           <a
             key={cat.id}
             href={cat.categoryUrl}
-            className="group flex flex-col items-center space-y-3.5 p-3 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-xl hover:-translate-y-1.5 focus:outline-none"
+            className="group flex flex-col items-center space-y-2 md:space-y-3.5 p-1.5 md:p-3 rounded-2xl transition-all duration-300 hover:bg-white  hover:-translate-y-1.5 focus:outline-none"
           >
-            {/* Circular Image Container */}
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center  group-hover:scale-105 transition-all duration-300 relative overflow-hidden ring-4 ring-white bg-neutral-100">
+            {/* Circular Image Container (Optimized size for mobile grid-cols-4) */}
+            <div className="w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center group-hover:scale-105 transition-all duration-300 relative overflow-hidden ring-2 sm:ring-4 ring-white bg-neutral-100 shadow-sm">
               <img
                 src={cat.imageUrl}
                 alt={cat.name}
-                
-                
-                className=" group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
             </div>
 
             {/* Category Details */}
-            <div className="space-y-1">
-              <h3 className="text-xs sm:text-sm font-extrabold tracking-wider text-neutral-900 group-hover:text-[#D90452] transition-colors">
+            <div className="space-y-0.5 md:space-y-1 w-full">
+              <h3 className="text-[10px] sm:text-xs md:text-sm font-extrabold tracking-wider text-neutral-900 group-hover:text-[#D90452] transition-colors truncate">
                 {cat.name}
               </h3>
-              <p className="text-[11px] font-medium text-neutral-400 group-hover:text-neutral-600 transition-colors">
+              <p className="text-[9px] sm:text-[11px] font-medium text-neutral-400 group-hover:text-neutral-600 transition-colors truncate">
                 {cat.productCount}
               </p>
             </div>

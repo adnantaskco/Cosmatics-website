@@ -1,31 +1,29 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function HeroSection2() {
-  // Dynamic banner data array
   const mainBanners = [
     {
       id: 1,
-      image: "https://lavishta.com/wp-content/uploads/2024/12/61IjVMs5NMS._SL1000_-700x700.jpg",
-      title: "Sheer-Mineral-Sunscreen-Face-Drops",
-      link: "/sales/Sheer-Mineral-Sunscreen-Face-Drops"
+      image: "https://i.pinimg.com/736x/07/14/a8/0714a85f99b9c89ca44564c57468ab0a.jpg",
+      title: "Sheer-Mineral-Sunscreen-Face-Drops"
     },
     {
       id: 2,
-      image: "https://lavishta.com/wp-content/uploads/2023/10/Dear-Darling-Water-Tint-Cherry-Ade-RedOrange-Ade-OrangeStrawberry-Ade-Pink.jpg",
-      title: "Daily Dear-Darling-Water-Tint-Cherry",
-      link: "/categories/Dear-Darling-Water-Tint-Cherry"
+      image: "https://i.pinimg.com/1200x/63/8d/9e/638d9e0a72c865c558344d179651835d.jpg",
+      title: "Daily Dear-Darling-Water-Tint-Cherry"
     },
     {
       id: 3,
-      image: "https://lavishta.com/wp-content/uploads/2026/03/ETUDE_WATER_TINT_COLLECTION.webp",
-      title: "Organic Fruits Discount",
-      link: "/categories/ETUDE_WATER_TINT_COLLECTION"
+      image: "https://i.pinimg.com/736x/98/a5/35/98a535bf77b49a828c1a8390500eace9.jpg",
+      title: "Organic Fruits Discount"
     }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const dragStartX = useRef(0);
+  const isDragging = useRef(false);
 
   // Auto-slide every 5 seconds
   useEffect(() => {
@@ -47,54 +45,76 @@ export default function HeroSection2() {
     );
   };
 
+  // Drag / Swipe handlers
+  const handlePointerDown = (clientX: number) => {
+    dragStartX.current = clientX;
+    isDragging.current = true;
+  };
+
+  const handlePointerUp = (clientX: number) => {
+    if (!isDragging.current) return;
+    const diff = dragStartX.current - clientX;
+    
+    if (diff > 40) {
+      handleNext();
+    } else if (diff < -40) {
+      handlePrev();
+    }
+    isDragging.current = false;
+  };
+
   return (
-    <section className=" mx-auto px-4 py-6">
-      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-4">
+    <section className="w-full mx-auto px-4 py-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-1.5">
 
         {/* Left Side Banner */}
-        <div className="md:col-span-2 lg:col-span-3 rounded-2xl hidden md:block overflow-hidden shadow-sm hover:shadow-md transition">
-          <a href="#">
-            <img 
-              src="https://plain-apac-prod-public.komododecks.com/202610/17/X7tRuRNna7PDGl6iOTam/image.jpg" 
-              alt="App Banner" 
-              className="w-full h-full  min-h-[30px] max-h-[420px]"
-            />
-          </a>
+        <div className="md:col-span-2 lg:col-span-3 rounded-2xl hidden md:block overflow-hidden  bg-gray-100">
+          <img 
+            src="https://i.pinimg.com/1200x/7a/23/e6/7a23e61ef01cd3b32e119919eae87535.jpg" 
+            alt="App Banner" 
+            className="w-full h-full min-h-[30px] max-h-[420px] rounded-2xl "
+          />
         </div>
 
         {/* Center Dynamic Carousel Banner */}
-        <div className="md:col-span-2 lg:col-span-6 rounded-2xl overflow-hidden shadow-sm relative group min-h-[30px] max-h-[420px] bg-gray-100">
-          <a href={mainBanners[currentIndex].link} className="block w-full h-full">
+        <div 
+          className="md:col-span-2 lg:col-span-6 rounded-2xl overflow-hidden shadow-sm relative group min-h-[30px] max-h-[420px] bg-gray-100 cursor-grab active:cursor-grabbing select-none"
+          onMouseDown={(e) => handlePointerDown(e.clientX)}
+          onMouseUp={(e) => handlePointerUp(e.clientX)}
+          onTouchStart={(e) => handlePointerDown(e.touches[0].clientX)}
+          onTouchEnd={(e) => handlePointerUp(e.changedTouches[0].clientX)}
+        >
+          <div className="w-full h-full">
             <img 
               src={mainBanners[currentIndex].image} 
               alt={mainBanners[currentIndex].title} 
-              className="w-full h-full  transition-all duration-500 ease-in-out"
+              className="w-full h-full object-cover transition-all duration-500 ease-in-out pointer-events-none rounded-2xl"
             />
-          </a>
+          </div>
 
           {/* Navigation Controls */}
-          <button 
-            onClick={handlePrev}
+          {/* <button 
+            onClick={(e) => { e.stopPropagation(); handlePrev(); }}
             aria-label="Previous Slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition duration-200"
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition duration-200 z-10"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           
           <button 
-            onClick={handleNext}
+            onClick={(e) => { e.stopPropagation(); handleNext(); }}
             aria-label="Next Slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition duration-200"
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition duration-200 z-10"
           >
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </button> */}
 
           {/* Pagination Indicators */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
             {mainBanners.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={(e) => { e.stopPropagation(); setCurrentIndex(index); }}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
                   currentIndex === index ? 'w-6 bg-emerald-600' : 'w-2.5 bg-white/70'
                 }`}
@@ -104,28 +124,24 @@ export default function HeroSection2() {
           </div>
         </div>
 
-{/* Right Side Stacked Banners */}
-<div className="md:col-span-4 lg:col-span-3 flex flex-row sm:flex-row lg:flex-col gap-2 sm:gap-3 lg:gap-4">
-  <div className="w-1/2 sm:w-1/2 lg:w-full flex-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-    <a href="#" className="block">
-      <img
-        src="https://lavishta.com/wp-content/uploads/2025/09/fe13a82MAYBE00000380_6.avif"
-        alt="Summer Flavors"
-        className="w-full h-32 sm:h-40 md:h-48 lg:h-[198px] "
-      />
-    </a>
-  </div>
+        {/* Right Side Stacked Banners */}
+        <div className="md:col-span-4 lg:col-span-3 flex flex-row sm:flex-row lg:flex-col gap-1.5 justify-between">
+          <div className="w-1/2 sm:w-1/2 lg:w-full rounded-2xl overflow-hidden shadow-sm bg-gray-100">
+            <img
+              src="https://i.pinimg.com/736x/f9/6b/3a/f96b3a1b4e1c70342fe50701da3bf7c5.jpg"
+              alt="Summer Flavors"
+              className="w-full h-32 sm:h-40 md:h-48 lg:h-[208px] object-cover rounded-2xl block"
+            />
+          </div>
 
-  <div className="w-1/2 sm:w-1/2 lg:w-full flex-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-    <a href="#" className="block">
-      <img
-        src="https://lavishta.com/wp-content/uploads/2026/03/Lip-Oil-Nourishing-Gloss-GLC728-infographic-01.webp"
-        alt="Fresh Veggies"
-        className="w-full h-32 sm:h-40 md:h-48 lg:h-[198px] "
-      />
-    </a>
-  </div>
-</div>
+          <div className="w-1/2 sm:w-1/2 lg:w-full rounded-2xl overflow-hidden shadow-sm bg-gray-100">
+            <img
+              src="https://i.pinimg.com/736x/7e/73/a7/7e73a78478b4dc526453e66411fe6dc5.jpg"
+              alt="Fresh Veggies"
+              className="w-full h-32 sm:h-40 md:h-48 lg:h-[208px] object-cover rounded-2xl block"
+            />
+          </div>
+        </div>
 
       </div>
     </section>
