@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from 'react';
 import { ShoppingCart, Search, Sparkles, Star, Heart } from 'lucide-react';
 import { Card } from "@/components/ui/card";
@@ -245,7 +245,7 @@ const forYouTabsData: ForYouTabsData = {
       has_variants: false,
       slug: "real-technique-skin-tint-base-brush",
       sku: "RT-93",
-     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGHftuOM5xfF3xngC0ySbNkUEunVfT_DBT7bU0fg15xw&s=10",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGHftuOM5xfF3xngC0ySbNkUEunVfT_DBT7bU0fg15xw&s=10",
       image_variants: {
         medium: "https://media.ulta.com/i/ulta/2659195_alt05?w=800&h=800&fmt=auto"
       },
@@ -296,12 +296,8 @@ const forYouTabsData: ForYouTabsData = {
 
 export default function ForYouTabCarouselSection() {
   const [activeTab, setActiveTab] = useState<string>("FORYOU");
-  const [activeImageState, setActiveImageState] = useState<{ [key: number]: boolean }>({});
+  const [activeCardId, setActiveCardId] = useState<number | null>(null);
   const currentProducts = forYouTabsData[activeTab] || forYouTabsData["FORYOU"];
-
-  const toggleMobileImage = (id: number) => {
-    setActiveImageState(prev => ({ ...prev, [id]: !prev[id] }));
-  };
 
   return (
     <section className="w-full container mx-auto px-4 md:px-8 lg:px-16 py-12 bg-gradient-to-b from-white to-rose-50/20 font-sans">
@@ -312,9 +308,9 @@ export default function ForYouTabCarouselSection() {
         }}
         className="w-full relative"
       >
-        {/* Header & Tab Navigation */}
+        {/* Header & X-Axis Scrollable Tab Navigation */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-8 border-b border-rose-100 gap-4">
-          <div className="flex items-center gap-2 sm:gap-8 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 scrollbar-none">
+          <div className="flex items-center gap-2 sm:gap-8 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {[
               { key: "FORYOU", label: "FOR YOU" },
               { key: "NEW", label: "NEW" },
@@ -324,122 +320,124 @@ export default function ForYouTabCarouselSection() {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`text-xs md:text-sm font-extrabold tracking-wider uppercase pb-2 border-b-2 transition-all whitespace-nowrap flex items-center gap-1.5 ${
+                className={`text-xs md:text-sm font-extrabold tracking-wider uppercase pb-2 border-b-2 transition-all whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
                   activeTab === tab.key 
-                    ? "border-[#D90452] text-neutral-900 scale-105" 
+                    ? "border-rose-600 text-neutral-900 scale-105" 
                     : "border-transparent text-neutral-400 hover:text-neutral-700"
                 }`}
               >
-                {activeTab === tab.key && <Sparkles className="w-3.5 h-3.5 text-[#D90452] animate-pulse" />}
+                {activeTab === tab.key && <Sparkles className="w-3.5 h-3.5 text-rose-600 animate-pulse" />}
                 {tab.label}
               </button>
             ))}
           </div>
 
-          <div className="flex items-center gap-1.5">
-            <CarouselPrevious className="static translate-y-0 h-9 w-9 rounded-full border border-rose-200 bg-white hover:bg-[#D90452] hover:text-white hover:border-[#D90452] text-neutral-800 transition-all shadow-sm" />
-            <CarouselNext className="static translate-y-0 h-9 w-9 rounded-full border border-rose-200 bg-white hover:bg-[#D90452] hover:text-white hover:border-[#D90452] text-neutral-800 transition-all shadow-sm" />
+          <div className="flex items-center gap-1.5 shrink-0">
+            <CarouselPrevious className="static translate-y-0 h-9 w-9 rounded-full border border-rose-200 bg-white hover:bg-rose-600 hover:text-white hover:border-rose-600 text-neutral-800 transition-all shadow-sm" />
+            <CarouselNext className="static translate-y-0 h-9 w-9 rounded-full border border-rose-200 bg-white hover:bg-rose-600 hover:text-white hover:border-rose-600 text-neutral-800 transition-all shadow-sm" />
           </div>
         </div>
 
         {/* Carousel Content Container */}
         <CarouselContent className="-ml-3">
           {currentProducts.map((product) => {
-            const isHoveredOrTapped = activeImageState[product.id];
-            const hasHoverImage = Boolean(product.image_variants?.medium && product.image_variants.medium !== "null");
-            const activeHoverImage = hasHoverImage ? product.image_variants.medium : product.image;
+            const hasHoverImage = product.image_variants?.medium && 
+                                  product.image_variants.medium !== "null" && 
+                                  product.image_variants.medium.trim() !== "";
+
+            const isTouched = activeCardId === product.id;
 
             return (
               <CarouselItem key={product.id} className="pl-3 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
-                <Card className="group/card relative bg-white rounded-2xl border border-neutral-100/85 shadow-sm hover:shadow-xl hover:border-pink-200 transition-all duration-300 flex flex-col justify-between p-3.5 h-full overflow-hidden">
+                <Card
+                  onClick={() => setActiveCardId(isTouched ? null : product.id)}
+                  className="group relative bg-white rounded-2xl border border-neutral-100/80 shadow-sm hover:shadow-xl hover:border-pink-200 flex flex-col justify-between p-2.5 md:p-3.5 transition-all duration-300 overflow-hidden cursor-pointer h-full"
+                >
                   <div>
-                    {/* Badges Container */}
-                    <div className="absolute top-3 left-3 z-20 flex flex-col gap-1 items-start">
-                      {product.has_discount && product.discount && (
-                        <span className="bg-gradient-to-r from-pink-600 to-rose-500 text-white text-[10px] font-extrabold tracking-wider px-2 py-0.5 rounded-full shadow-md shadow-pink-500/20">
-                          {product.discount}
-                        </span>
-                      )}
-                      {product.isNew && (
-                        <span className="bg-emerald-600 text-white text-[9px] md:text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
-                          NEW
-                        </span>
-                      )}
-                    </div>
+                    {/* Product Image & Floating Action Hub */}
+                    <div className="relative w-full aspect-square bg-gradient-to-b from-neutral-50/80 to-neutral-100/50 rounded-xl overflow-hidden mb-2">
+                      
+                      {/* Badges Container */}
+                      <div className="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
+                        {product.has_discount && product.discount && (
+                          <span className="bg-gradient-to-r from-pink-600 to-rose-500 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider px-1.5 py-0.5 rounded-full shadow-md shadow-pink-500/20">
+                            {product.discount}
+                          </span>
+                        )}
+                        {product.isNew && (
+                          <span className="bg-emerald-600 text-white text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+                            NEW
+                          </span>
+                        )}
+                      </div>
 
-                    {/* Quick Wishlist Icon */}
-                    <button 
-                      aria-label="Add to wishlist"
-                      className="absolute top-2.5 right-2.5 z-20 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-neutral-500 hover:text-pink-600 hover:bg-white shadow-sm transition-all opacity-0 group-hover/card:opacity-100"
-                    >
-                      <Heart size={14} />
-                    </button>
-
-                    {/* Product Image Container */}
-                    <div 
-                      onClick={() => toggleMobileImage(product.id)}
-                      className="relative w-full aspect-square bg-gradient-to-b from-neutral-50/80 to-neutral-100/50 rounded-xl overflow-hidden mb-3 cursor-pointer"
-                    >
-                      {/* Primary Image */}
-                      <img 
-                        src={product.image} 
-                        alt={product.name}
-                        className={`w-full h-full object-cover transition-all duration-500 group-hover/card:scale-105 ${
-                          isHoveredOrTapped || !hasHoverImage ? 'opacity-0' : 'opacity-100 group-hover/card:opacity-0'
+                      {/* Quick Wishlist Icon */}
+                      <button 
+                        aria-label="Add to wishlist"
+                        className={`absolute top-2 right-2 z-20 w-7 h-7 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-neutral-500 hover:text-pink-600 hover:bg-white shadow-sm transition-all ${
+                          isTouched ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                         }`}
+                      >
+                        <Heart size={12} />
+                      </button>
+                      
+                      {/* Default Image */}
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className={`w-full h-full object-cover transition-all duration-500 ${
+                          hasHoverImage ? (isTouched ? "opacity-0" : "group-hover:opacity-0") : ""
+                        } group-hover:scale-105`}
                       />
 
                       {/* Hover Image */}
-                      {hasHoverImage && (
-                        <img 
-                          src={activeHoverImage} 
+                      {hasHoverImage && product.image_variants?.medium && (
+                        <img
+                          src={product.image_variants.medium}
                           alt={`${product.name} hover`}
-                          className={`w-full h-full object-cover absolute inset-0 transition-all duration-500 group-hover/card:scale-105 ${
-                            isHoveredOrTapped ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'
+                          className={`w-full h-full object-cover absolute inset-0 transition-all duration-500 group-hover:scale-105 pointer-events-none ${
+                            isTouched ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                           }`}
                         />
                       )}
 
-                      {/* Action Buttons */}
-                      <div className={`absolute inset-x-0 bottom-3 flex items-center justify-center gap-2 transition-all duration-300 z-20 px-2 ${
-                        isHoveredOrTapped 
-                          ? 'opacity-100 translate-y-0 pointer-events-auto' 
-                          : 'opacity-0 translate-y-2 pointer-events-none md:group-hover/card:opacity-100 md:group-hover/card:translate-y-0 md:group-hover/card:pointer-events-auto'
+                      {/* Floating Action Buttons Hub */}
+                      <div className={`absolute inset-x-0 bottom-2 flex items-center justify-center gap-1.5 transition-all duration-300 z-20 px-2 ${
+                        isTouched ? "opacity-100 transform translate-y-0" : "opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0"
                       }`}>
                         <button 
                           onClick={(e) => { e.stopPropagation(); alert(`Added to cart: ${product.name}`); }}
                           aria-label="Add to cart" 
-                          className="w-8 h-8 md:w-10 md:h-10 bg-white/95 backdrop-blur text-neutral-800 hover:bg-rose-600 hover:text-white rounded-full flex items-center justify-center shadow-md transition-all transform hover:scale-105"
+                          className="w-7 h-7 md:w-9 md:h-9 bg-white/95 backdrop-blur text-neutral-800 hover:bg-rose-600 hover:text-white rounded-full flex items-center justify-center shadow-md transition-all transform hover:scale-105"
                         >
-                          <ShoppingCart className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                          <ShoppingCart className="w-3 h-3 md:w-4 md:h-4" />
                         </button>
                         <button 
                           onClick={(e) => { e.stopPropagation(); alert(`Quick view: ${product.name}`); }}
                           aria-label="Quick search view" 
-                          className="w-8 h-8 md:w-10 md:h-10 bg-white/95 backdrop-blur text-neutral-800 hover:bg-rose-600 hover:text-white rounded-full flex items-center justify-center shadow-md transition-all transform hover:scale-105"
+                          className="w-7 h-7 md:w-9 md:h-9 bg-white/95 backdrop-blur text-neutral-800 hover:bg-rose-600 hover:text-white rounded-full flex items-center justify-center shadow-md transition-all transform hover:scale-105"
                         >
-                          <Search className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                          <Search className="w-3 h-3 md:w-4 md:h-4" />
                         </button>
                       </div>
                     </div>
 
-                    {/* Product Details */}
-                    <div className="space-y-1.5 text-left px-1">
-                      <p className="text-[10px] sm:text-[10px] md:text-xs text-pink-600 font-semibold tracking-wider uppercase truncate">
+                    {/* Product Info */}
+                    <div className="space-y-0.5 md:space-y-1 text-left px-0.5">
+                      <p className="text-[9px] md:text-xs text-pink-600 font-semibold tracking-wider uppercase truncate">
                         {product.brand} • {product.category.split(',')[0]}
                       </p>
 
-                      <h3 className="text-xs sm:text-xs md:text-[17px] font-bold text-neutral-800 line-clamp-2 leading-relaxed hover:text-pink-600 transition-colors">
-                        <a href={product.productUrl}>{product.name}</a>
+                      <h3 className="text-xs md:text-sm font-bold text-neutral-800 line-clamp-2 leading-snug hover:text-pink-600 transition-colors">
+                        <a href={product.productUrl || `/products/${product.slug}`}>{product.name}</a>
                       </h3>
 
-                      {/* Star Rating */}
                       <div className="flex items-center gap-1 pt-0.5">
                         <div className="flex text-amber-400">
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
-                              className={`w-3 h-3 ${
+                              className={`w-2.5 h-2.5 md:w-3 md:h-3 ${
                                 i < Math.floor(product.review)
                                   ? "fill-amber-400 text-amber-400"
                                   : "text-neutral-200"
@@ -447,16 +445,15 @@ export default function ForYouTabCarouselSection() {
                             />
                           ))}
                         </div>
-                        <span className="text-[10px] text-neutral-400 font-medium">({product.review})</span>
+                        <span className="text-[9px] md:text-[10px] text-neutral-400 font-medium">({product.review})</span>
                       </div>
 
-                      {/* Pricing */}
-                      <div className="flex items-center gap-2 pt-1">
-                        <span className="text-xs sm:text-sm font-bold text-neutral-900">
+                      <div className="flex items-center gap-1.5 pt-0.5">
+                        <span className="text-xs md:text-sm font-bold text-neutral-900">
                           {product.sale_price}
                         </span>
                         {product.retail_price && (
-                          <span className="text-[11px] text-neutral-400 line-through font-normal">
+                          <span className="text-[10px] md:text-[11px] text-neutral-400 line-through font-normal">
                             {product.retail_price}
                           </span>
                         )}

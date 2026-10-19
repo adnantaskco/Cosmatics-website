@@ -1,46 +1,46 @@
 "use client";
 import React, { useState } from 'react';
-import { Star, ChevronLeft, ChevronRight, Minus } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function CustomerTestimonials() {
- const testimonials = [
-  {
-    quote: "After using these products consistently, my skin feels noticeably smoother and more balanced. The formulas are lightweight, absorb quickly, and leave my skin hydrated without any heaviness or irritation.",
-    name: "Charlesetta R. York",
-    location: "From Florida",
-    image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-1.jpg?v=1776669532&width=380",
-  },
-  {
-    quote: "What impressed me most is how gentle the products are, yet still incredibly effective. My skin looks calmer, healthier, and more radiant over time, even without adding extra steps to my routine.",
-    name: "Laura Parker",
-    location: "From Ohio",
-    image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-2.jpg?v=1776669532&width=380",
-  },
-  {
-    quote: "I love how lightweight and soothing the products feel on my skin while still delivering visible results. My complexion feels more balanced, refreshed, and naturally glowing with consistent use.",
-    name: "Emily Johnson",
-    location: "From Canada",
-    image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-3.jpg?v=1776669532&width=380",
-  },
-  {
-    quote: "The biggest difference I noticed is how effortlessly the products fit into my routine while improving my skin day after day. My face feels smoother, calmer, and visibly healthier without any irritation.",
-    name: "Olivia Smith",
-    location: "From USA",
-    image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-3.jpg?v=1776669532&width=380",
-  },
-  {
-    quote: "What stands out to me most is the perfect balance between gentleness and performance. My skin feels deeply nourished, looks brighter, and maintains a healthy glow without needing complicated skincare steps.",
-    name: "Alina M. Foster",
-    location: "From California",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600",
-  },
-  {
-    quote: "I’m amazed at how effective the products are despite feeling so soft and calming on the skin. Over time, my complexion has become clearer, more even, and naturally radiant with very little effort.",
-    name: "Camila S. Brooks",
-    location: "From Texas",
-    image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-5.jpg?v=1776669532&width=380",
-  },
-];
+  const testimonials = [
+    {
+      quote: "After using these products consistently, my skin feels noticeably smoother and more balanced. The formulas are lightweight, absorb quickly, and leave my skin hydrated without any heaviness or irritation.",
+      name: "Charlesetta R. York",
+      location: "From Florida",
+      image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-1.jpg?v=1776669532&width=380",
+    },
+    {
+      quote: "What impressed me most is how gentle the products are, yet still incredibly effective. My skin looks calmer, healthier, and more radiant over time, even without adding extra steps to my routine.",
+      name: "Laura Parker",
+      location: "From Ohio",
+      image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-2.jpg?v=1776669532&width=380",
+    },
+    {
+      quote: "I love how lightweight and soothing the products feel on my skin while still delivering visible results. My complexion feels more balanced, refreshed, and naturally glowing with consistent use.",
+      name: "Emily Johnson",
+      location: "From Canada",
+      image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-3.jpg?v=1776669532&width=380",
+    },
+    {
+      quote: "The biggest difference I noticed is how effortlessly the products fit into my routine while improving my skin day after day. My face feels smoother, calmer, and visibly healthier without any irritation.",
+      name: "Olivia Smith",
+      location: "From USA",
+      image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-3.jpg?v=1776669532&width=380",
+    },
+    {
+      quote: "What stands out to me most is the perfect balance between gentleness and performance. My skin feels deeply nourished, looks brighter, and maintains a healthy glow without needing complicated skincare steps.",
+      name: "Alina M. Foster",
+      location: "From California",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600",
+    },
+    {
+      quote: "I’m amazed at how effective the products are despite feeling so soft and calming on the skin. Over time, my complexion has become clearer, more even, and naturally radiant with very little effort.",
+      name: "Camila S. Brooks",
+      location: "From Texas",
+      image: "https://binova-vinovatheme.myshopify.com/cdn/shop/files/avatar-5.jpg?v=1776669532&width=380",
+    },
+  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -53,32 +53,31 @@ export default function CustomerTestimonials() {
   };
 
   return (
-    <section className="bg-neutral-50 py-20  ">
+    <section className="bg-neutral-50 py-6 sm:py-5 md:py-20">
       <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
         {/* Main Title */}
-        <h2 className="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-r from-neutral-900 to-rose-900 bg-clip-text text-transparent uppercase">
+        <h2 className="text-lg md:text-2xl font-bold tracking-tight bg-gradient-to-r from-neutral-900 to-rose-900 bg-clip-text text-transparent uppercase">
           What Our Customers Say
         </h2>
         
         {/* Subtitle */}
-        <p className="text-sm text-neutral-500 mb-12">
+        <p className="text-xs md:text-sm text-neutral-500 mb-8 md:mb-12">
           Real feedback from customers who trust our beauty essentials.
         </p>
 
-        {/* Carousel Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8   items-stretch">
+        {/* Carousel Container: 2 columns on mobile and desktop */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 items-stretch">
           {testimonials.map((item, index) => {
-            // Simple logic to showcase a dual-card view on desktop like the design
             const isVisible = index === currentIndex || index === (currentIndex + 1) % testimonials.length;
             if (!isVisible) return null;
 
             return (
               <div
                 key={index}
-                className="flex flex-col sm:flex-row bg-white rounded-xl shadow-sm border border-neutral-100 p-6 sm:p-8 text-left transition-all duration-300"
+                className="flex flex-col sm:flex-row bg-white rounded-xl shadow-sm border border-neutral-100 p-3 sm:p-6 text-left transition-all duration-300"
               >
                 {/* Customer Image */}
-                <div className="w-full sm:w-36 h-48 sm:h-auto flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
+                <div className="w-full sm:w-28 h-28 sm:h-auto flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -90,24 +89,24 @@ export default function CustomerTestimonials() {
                 <div className="flex flex-col justify-between flex-grow">
                   <div>
                     {/* Stars */}
-                    <div className="flex space-x-1 text-neutral-900 mb-3">
+                    <div className="flex space-x-0.5 text-neutral-900 mb-2">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-current text-neutral-900" />
+                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-current text-neutral-900" />
                       ))}
                     </div>
 
                     {/* Quote */}
-                    <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-6 font-normal">
+                    <p className="text-[10px] sm:text-xs text-neutral-600 leading-snug sm:leading-relaxed mb-4 font-normal line-clamp-4 sm:line-clamp-none">
                       &ldquo;{item.quote}&rdquo;
                     </p>
                   </div>
 
                   {/* Author Details */}
                   <div>
-                    <h4 className="font-serif font-medium text-neutral-900 text-sm">
+                    <h4 className="font-serif font-medium text-neutral-900 text-xs sm:text-sm">
                       {item.name}
                     </h4>
-                    <span className="text-xs text-neutral-400">
+                    <span className="text-[10px] text-neutral-400">
                       {item.location}
                     </span>
                   </div>
@@ -118,7 +117,7 @@ export default function CustomerTestimonials() {
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex items-center justify-center space-x-4 mt-10">
+        <div className="flex items-center justify-center space-x-4 mt-8 md:mt-10">
           <button
             onClick={prevSlide}
             className="text-neutral-400 hover:text-neutral-900 transition-colors"

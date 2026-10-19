@@ -139,7 +139,7 @@ export function MostPopularSectionExact() {
                   </p>
 
                   <h3 className="text-xs md:text-sm font-bold text-neutral-800 line-clamp-2 leading-snug hover:text-pink-600 transition-colors">
-                    <a href={`/product/${product.slug}`}>{product.name}</a>
+                    <a href={`/products/${product.slug}`}>{product.name}</a>
                   </h3>
 
                   <div className="flex items-center gap-1 pt-0.5">
