@@ -1,7 +1,7 @@
 import { ImageHeroCarousel } from "@/components/hero";
 import { MostPopularSectionExact } from "@/components/mostpopularsection";
 
-import  Navbar  from "@/components/Navbar";
+
 import {TrendingSection} from "@/components/trending"
 
 import { ShopByCategory } from "@/components/Shopbycategories";

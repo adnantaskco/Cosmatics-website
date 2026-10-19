@@ -9,7 +9,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const resolvedParams = await params;
   const productSlug = resolvedParams.slug;
 
-  const product = ALL_PRODUCTS.find((p) => p.slug === productSlug);
+  // Safely find the product while handling potential undefined elements in the dataset
+  const product = (ALL_PRODUCTS as (typeof ALL_PRODUCTS[number] | undefined)[]).find(
+    (p) => p !== undefined && p.slug === productSlug
+  );
 
   if (!product) {
     return (

@@ -33,6 +33,11 @@ interface Product {
   discount?: string;
 }
 
+// Safely cast and filter out any potential undefined items from ALL_PRODUCTS
+const VALID_PRODUCTS: Product[] = (ALL_PRODUCTS as (Product | undefined)[]).filter(
+  (p): p is Product => p !== undefined
+);
+
 export default function ProductsPage() {
   // Filter States
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -50,7 +55,7 @@ export default function ProductsPage() {
   // Extract Unique Dynamic Options for Sidebar Filters
   const availableBrands = useMemo(() => {
     const counts: Record<string, number> = {};
-    ALL_PRODUCTS.forEach(p => {
+    VALID_PRODUCTS.forEach(p => {
       counts[p.brand] = (counts[p.brand] || 0) + 1;
     });
     return Object.entries(counts).sort((a, b) => b[1] - a[1]);
@@ -58,7 +63,7 @@ export default function ProductsPage() {
 
   const availableCategories = useMemo(() => {
     const counts: Record<string, number> = {};
-    ALL_PRODUCTS.forEach(p => {
+    VALID_PRODUCTS.forEach(p => {
       p.category.split(',').forEach(cat => {
         const trimmed = cat.trim();
         counts[trimmed] = (counts[trimmed] || 0) + 1;
@@ -74,7 +79,7 @@ export default function ProductsPage() {
 
   // Filter & Sort Logic
   const filteredProducts = useMemo(() => {
-    let result = ALL_PRODUCTS.filter(product => {
+    let result = VALID_PRODUCTS.filter(product => {
       // Search Query
       if (searchQuery.trim() !== "") {
         const query = searchQuery.toLowerCase();
@@ -448,7 +453,7 @@ export default function ProductsPage() {
                           </p>
 
                           <h3 className="text-xs md:text-sm font-bold text-neutral-800 line-clamp-2 leading-snug hover:text-pink-600 transition-colors">
-                            <a href={`/product/${product.slug}`}>{product.name}</a>
+                            <a href={`/products/${product.slug}`}>{product.name}</a>
                           </h3>
 
                           <div className="flex items-center gap-1 pt-0.5">
