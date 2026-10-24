@@ -123,7 +123,7 @@ export default function KBeautyAutoCarousel() {
 
       <div className="relative w-full h-[350px] sm:h-[200px] md:h-[350px]  overflow-hidden bg-rose-50 ">
         <img 
-            src="https://cdn.lifepharmacy.com/images/09-26/zdkVY81hjRxNBGBnybia4yeGnQj3RyoCECGs4LB3.jpg" 
+            src="https://plain-apac-prod-public.komododecks.com/202610/24/TNqW3tLLp4ywmXFGcMhr/image.jpg" 
             alt="K-Beauty Glass Skin Collection Banner" 
             className="absolute inset-0 w-full h-full  "
         />

@@ -71,10 +71,7 @@ export default function ClientProductView({ product }: { product: Product | unde
   const decrementQty = () => setQuantity(q => Math.max(1, q - 1));
 
   const activeImageSrc = 
-    product.image_variants?.medium || 
-    product.image_variants?.thumbnail || 
-    product.image || 
-    '/placeholder.jpg';
+    product.image  ;
 
   const parsePrice = (priceStr?: string) => {
     if (!priceStr) return 0;

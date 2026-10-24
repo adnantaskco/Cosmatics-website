@@ -55,7 +55,7 @@ export const kbeautyProducts = [
     has_variants: true,
     slug: "anua-heartleaf-77-soothing-toner",
     sku: "ANUA-203",
-    image: "https://skincarebd.com/wp-content/uploads/2023/11/anua-heartleaf-77-soothing-toner-mini-size-40ml-bjzqyt.webp",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSed8Ol0uemODieaQGxr-1FIuuxDelVjyaFKSh2sjcupA&s=10",
     image_variants: {
       medium: "https://liraimportltd.com/wp-content/uploads/2025/01/23332-Anua-Heartleaf-77-Percent-Soothing-Toner-40-Ml_1.jpg"
     },

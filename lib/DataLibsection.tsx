@@ -7,9 +7,9 @@ export const DataLipProducts = [
     has_variants: true,
     slug: "rare-beauty-kind-words-matte-lip-liner",
     sku: "RB-135",
-    image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=600&auto=format&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgLRqWnJfCWnpHEAsDGgiJAljk4JEwJ9Z9fbm_A51YoA&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYapx10L7SMmMekWhjoFDLK2wZHjhctlAEDfwmfoZwVw&s=10",
     image_variants: {
-      medium: "https://images.unsplash.com/photo-1625093742435-6fa8994da2bb?q=80&w=600&auto=format&fit=crop"
+      medium: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv6aTGMDHbd2m7ttAS-TkYBp1WGEOk5iL9b3qa7OrfGv_DYegAsNSogMM_&s=10"
     },
     sold_amount: 120,
     review: 4.8,
@@ -31,9 +31,9 @@ export const DataLipProducts = [
     has_variants: true,
     slug: "dior-addict-lip-glow",
     sku: "DIOR-137",
-    image: "https://images.unsplash.com/photo-1599733589046-10c005739ef9?q=80&w=600&auto=format&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJsCdOOv2MevgrIe3bW0SrafIUUlagnL57B4fKGNfCk6-y-kaUcZ83MGU&s=10",
     image_variants: {
-      medium: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=600&auto=format&fit=crop"
+      medium: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiLt8_-PPBl5XptTABY6jGL5EhNJZAG7-ZBNvcGyHSUw&s=10"
     },
     sold_amount: 310,
     review: 4.9,
@@ -55,9 +55,9 @@ export const DataLipProducts = [
     has_variants: false,
     slug: "nyx-lip-iv-hydrating-lip-gloss-stain",
     sku: "NYX-139",
-    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=600&auto=format&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2nuctwLfCzAuFWW0KucEsK6I0rrMErGmWkncoJmlaRg&s=10",
     image_variants: {
-      medium: "https://images.unsplash.com/photo-1599733589046-10c005739ef9?q=80&w=600&auto=format&fit=crop"
+      medium: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8L1G7Abu36xIDktJiS4XrXVZYaJ1Bc8fYV02anB2qsEaHU53FbFE5DJh&s=10"
     },
     sold_amount: 85,
     review: 4.6,
@@ -79,9 +79,9 @@ export const DataLipProducts = [
     has_variants: true,
     slug: "charlotte-tilbury-lip-cheat",
     sku: "CT-141",
-    image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?q=80&w=600&auto=format&fit=crop",
+    image: "https://www.afsheenbd.com/wp-content/uploads/2022/07/CHARLOTTE-TILBURY-Lip-Cheat-Lip-Liner_Pillow-Talk.jpeg?ver=1773909288",
     image_variants: {
-      medium: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=600&auto=format&fit=crop"
+      medium: "https://www.cultbeauty.com/images?url=https://static.thcdn.com/productimg/original/15057587-2095354664817047.jpg&format=webp&auto=avif&width=1200&height=1200&fit=cover"
     },
     sold_amount: 215,
     review: 4.7,
@@ -103,9 +103,9 @@ export const DataLipProducts = [
     has_variants: true,
     slug: "laneige-smore-kisses-set",
     sku: "LAN-142",
-    image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop",
+    image: "https://www.cultbeauty.com/images?url=https://static.thcdn.com/productimg/original/15781902-6695203264748862.jpg&format=webp&auto=avif&width=1200&height=1200&fit=cover",
     image_variants: {
-      medium: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?q=80&w=600&auto=format&fit=crop"
+      medium: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlT95PA9tp2STWzXZI-zK6B_Woi0ot7dN2tlOQh92FT_O82g1YR97X2K0&s=10"
     },
     sold_amount: 98,
     review: 5.0,
@@ -127,9 +127,9 @@ export const DataLipProducts = [
     has_variants: false,
     slug: "too-faced-melted-matte-longwear-lipstick",
     sku: "TF-144",
-    image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?q=80&w=600&auto=format&fit=crop",
+    image: "https://www.afsheenbd.com/wp-content/uploads/2023/05/Too-Faced-Melted-Matte-Liquid-Lipstick-Its-Happening.jpeg?ver=1773909289",
     image_variants: {
-      medium: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop"
+      medium: "https://bd-4.edkncdn.net/img/800x800/stores/5efb511e0cf3210011048946/product-square/1650581637461-wixG3ec0urA8B5tvjbBo0.webp"
     },
     sold_amount: 142,
     review: 4.5,

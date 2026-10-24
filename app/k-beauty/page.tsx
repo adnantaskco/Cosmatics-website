@@ -52,47 +52,16 @@ export default function MostPopularSectionExact() {
     <section>
 
         {/* Gorgeous & Attractive Section Header */}
-      <div className="relative bg-gradient-to-r from-primary via-rose-950 to-neutral-950 text-text-secondary py-8 sm:py-10 text-center overflow-hidden mb-10  mx-4 md:mx-0 border border-pink-500/20">
-        
-        {/* Background Image with Rich Opacity & Smooth Scale Effect */}
-        <div
-          className="absolute inset-0 opacity-35 bg-cover bg-center mix-blend-overlay transform hover:scale-105 transition-transform duration-1000"
-          style={{
-            backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRnFkhn8w46KJzPzpqem8e77n04-HchNkvycgQ--pGhjU7DQ8Ke5jrCoj3&s=10')`,
-          }}
+         <div className="relative w-full h-[350px] sm:h-[200px] md:h-[350px]  overflow-hidden bg-rose-50 ">
+        <img 
+            src="https://plain-apac-prod-public.komododecks.com/202610/24/Hn5RMKn1RSllzIimI7V7/image.png" 
+            alt="K-Beauty Glass Skin Collection Banner" 
+            className="absolute inset-0 w-full h-full  "
         />
-
-        {/* Decorative Radial Gradient Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent pointer-events-none" />
-
-        {/* Content Container */}
-        <div className="relative z-10 max-w-3xl mx-auto px-4 space-y-4">
-          
-          {/* Top Small Glowing Tag */}
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-pink-300/30 px-4 py-1.5 rounded-full text-pink-200 text-xs font-semibold tracking-widest uppercase shadow-inner animate-pulse">
-            <Sparkles size={14} className="text-primary" />
-            <span>Taskco Exclusive Glow</span>
-          </div>
-
-          {/* Main Title */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-wider uppercase bg-gradient-to-r from-white via-pink-100 to-pink-300 bg-clip-text text-transparent drop-shadow-md">
-            Our K-Beauty Products
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-xs sm:text-sm text-pink-100/80 font-medium tracking-wide max-w-xl mx-auto leading-relaxed">
-            Elevate your skincare ritual with 100% authentic Korean formulas designed for glass skin perfection.
-          </p>
-
-          {/* Decorative Bottom Line */}
-          <div className="flex items-center justify-center gap-2 pt-2">
-            <span className="w-8 h-[2px] bg-gradient-to-r from-transparent to-primary/80" />
-            <span className="w-2 h-2 rounded-full bg-primary  " />
-            <span className="w-8 h-[2px] bg-gradient-to-l from-transparent to-primary/80" />
-          </div>
-
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent flex flex-col justify-end p-6 md:p-12 lg:p-16">
+            {/* Banner text / content */}
         </div>
-      </div>
+        </div>
 
     </section>
         <section className="container mx-auto px-4 md:px-8 lg:px-16 bg-background font-sans py-6">

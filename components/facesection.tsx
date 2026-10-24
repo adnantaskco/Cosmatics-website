@@ -116,7 +116,7 @@ export default function FaceAutoCarousel() {
         </div>
         <a
           href="/shop"
-          className="self-start sm:self-auto text-xs md:text-sm font-semibold text-primary hover:text-primary transition-colors flex items-center gap-1 group bg-ring/80 px-3.5 py-1.5 md:px-4 md:py-2 rounded-full border border-rose-100 hover:shadow-sm"
+          className="self-start sm:self-auto text-xs md:text-sm font-semibold text-rose-600 hover:text-rose-700 transition-colors flex items-center gap-1 group bg-rose-50/80 px-3.5 py-1.5 md:px-4 md:py-2 rounded-full border border-rose-100"
         >
           View All <span className="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
         </a>
@@ -124,7 +124,7 @@ export default function FaceAutoCarousel() {
 
       <div className="relative w-full h-[350px] sm:h-[200px] md:h-[350px] overflow-hidden bg-background">
         <img 
-            src="https://plain-apac-prod-public.komododecks.com/202610/18/rolR8cdPZG4ubiGbOzfX/image.jpg" 
+            src="https://shorturl.at/kXbaB" 
             alt="Skin Collection Banner" 
             className="absolute inset-0 w-full h-full "
         />
@@ -216,7 +216,7 @@ export default function FaceAutoCarousel() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className={`w-full h-full object-cover transition-all duration-500 ${
+                        className={`w-full h-full  transition-all duration-500 ${
                           hasHoverImage ? (isTouched ? "opacity-0" : "group-hover/card:opacity-0") : ""
                         } group-hover/card:scale-105`}
                       />
@@ -226,7 +226,7 @@ export default function FaceAutoCarousel() {
                         <img
                           src={product.image_variants.medium}
                           alt={`${product.name} hover`}
-                          className={`w-full h-full object-cover absolute inset-0 transition-all duration-500 group-hover/card:scale-105 pointer-events-none ${
+                          className={`w-full h-full  absolute inset-0 transition-all duration-500 group-hover/card:scale-105 pointer-events-none ${
                             isTouched ? "opacity-100" : "opacity-0 group-hover/card:opacity-100"
                           }`}
                         />
