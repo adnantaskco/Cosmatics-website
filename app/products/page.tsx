@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react"
 import { Card } from "@/components/ui/card"
 import { Star, ShoppingCart, Search, Heart, Sparkles, Filter, X } from "lucide-react"
 import { ALL_PRODUCTS } from "@/lib/DataALLProducts"
+import { useCart } from "@/components/context/CartContext"
 
 interface ImageVariants {
   thumbnail?: string;
@@ -33,6 +34,14 @@ interface Product {
   discount?: string;
 }
 
+// Unified, robust price parser
+function parsePrice(value: string | undefined): number {
+  if (!value) return 0;
+  const normalized = value.replace(/,/g, "").replace(/[^\d.-]/g, "");
+  const num = Number(normalized);
+  return Number.isFinite(num) ? num : 0;
+}
+
 // Safely cast and filter out any potential undefined items from ALL_PRODUCTS
 const VALID_PRODUCTS: Product[] = (ALL_PRODUCTS as (Product | undefined)[]).filter(
   (p): p is Product => p !== undefined
@@ -48,15 +57,18 @@ export default function ProductsPage() {
   const [sortBy, setSortBy] = useState("popular");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
+  const { addToCart } = useCart();
   
   // Mobile Filter Drawer Toggle State
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  // Extract Unique Dynamic Options for Sidebar Filters
+  // Extract Unique Dynamic Options for Filters
   const availableBrands = useMemo(() => {
     const counts: Record<string, number> = {};
     VALID_PRODUCTS.forEach(p => {
-      counts[p.brand] = (counts[p.brand] || 0) + 1;
+      if (p.brand) {
+        counts[p.brand] = (counts[p.brand] || 0) + 1;
+      }
     });
     return Object.entries(counts).sort((a, b) => b[1] - a[1]);
   }, []);
@@ -64,28 +76,27 @@ export default function ProductsPage() {
   const availableCategories = useMemo(() => {
     const counts: Record<string, number> = {};
     VALID_PRODUCTS.forEach(p => {
-      p.category.split(',').forEach(cat => {
-        const trimmed = cat.trim();
-        counts[trimmed] = (counts[trimmed] || 0) + 1;
-      });
+      if (p.category) {
+        p.category.split(',').forEach(cat => {
+          const trimmed = cat.trim();
+          if (trimmed) {
+            counts[trimmed] = (counts[trimmed] || 0) + 1;
+          }
+        });
+      }
     });
     return Object.entries(counts).sort((a, b) => b[1] - a[1]);
   }, []);
 
-  // Helper to parse price string like "1,650 ৳" to number
-  const parsePrice = (priceStr: string) => {
-    return parseInt(priceStr.replace(/[^0-9]/g, ""), 10) || 0;
-  };
-
-  // Filter & Sort Logic
+  // Filter & Sort Logic with correct calculation
   const filteredProducts = useMemo(() => {
     let result = VALID_PRODUCTS.filter(product => {
       // Search Query
       if (searchQuery.trim() !== "") {
         const query = searchQuery.toLowerCase();
-        const matchesName = product.name.toLowerCase().includes(query);
-        const matchesBrand = product.brand.toLowerCase().includes(query);
-        const matchesCat = product.category.toLowerCase().includes(query);
+        const matchesName = product.name?.toLowerCase().includes(query);
+        const matchesBrand = product.brand?.toLowerCase().includes(query);
+        const matchesCat = product.category?.toLowerCase().includes(query);
         if (!matchesName && !matchesBrand && !matchesCat) return false;
       }
 
@@ -96,7 +107,7 @@ export default function ProductsPage() {
 
       // Category / Product Type Filter
       if (selectedCategories.length > 0) {
-        const prodCategories = product.category.split(',').map(c => c.trim());
+        const prodCategories = product.category ? product.category.split(',').map(c => c.trim()) : [];
         const hasMatchingCategory = selectedCategories.some(cat => prodCategories.includes(cat));
         if (!hasMatchingCategory) return false;
       }
@@ -114,8 +125,8 @@ export default function ProductsPage() {
 
     // Sorting Logic
     return result.sort((a, b) => {
-      if (sortBy === "popular") return b.sold_amount - a.sold_amount;
-      if (sortBy === "latest") return b.id - a.id;
+      if (sortBy === "popular") return (b.sold_amount || 0) - (a.sold_amount || 0);
+      if (sortBy === "latest") return (b.id || 0) - (a.id || 0);
       if (sortBy === "low-high") return parsePrice(a.sale_price) - parsePrice(b.sale_price);
       if (sortBy === "high-low") return parsePrice(b.sale_price) - parsePrice(a.sale_price);
       return 0;
@@ -143,7 +154,7 @@ export default function ProductsPage() {
     setSearchQuery("");
   };
 
-  // Reusable Filter Content Component to avoid duplication between Sidebar & Mobile Drawer
+  // Reusable Filter Content Component
   const FilterContent = () => (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
@@ -207,7 +218,7 @@ export default function ProductsPage() {
       {/* Brand Filter */}
       <div className="space-y-2">
         <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-700">Brand</h3>
-        <div className="max-h-48 overflow-y-auto space-y-1.5 pr-1">
+        <div className="max-h-48 overflow-y-auto space-y-1.5 pr-1 no-scrollbar">
           {availableBrands.map(([brand, count]) => (
             <label key={brand} className="flex items-center justify-between text-sm text-neutral-700 cursor-pointer hover:text-pink-600">
               <div className="flex items-center gap-2">
@@ -228,7 +239,7 @@ export default function ProductsPage() {
       {/* Product Type / Category Filter */}
       <div className="space-y-2">
         <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-700">Product Type</h3>
-        <div className="max-h-48 overflow-y-auto space-y-1.5 pr-1">
+        <div className="max-h-48 overflow-y-auto space-y-1.5 pr-1 no-scrollbar">
           {availableCategories.map(([cat, count]) => (
             <label key={cat} className="flex items-center justify-between text-sm text-neutral-700 cursor-pointer hover:text-pink-600">
               <div className="flex items-center gap-2">
@@ -258,6 +269,7 @@ export default function ProductsPage() {
               <Sparkles size={14} className="animate-pulse" />
               <span>Cosmetics & Skincare Collection</span>
             </div>
+            {/* FIXED: Dynamic product count */}
             <h1 className="text-2xl md:text-3xl font-black tracking-tight text-neutral-900 uppercase">
               All Products ({filteredProducts.length})
             </h1>
@@ -339,9 +351,7 @@ export default function ProductsPage() {
             
             {/* Sorting Header Bar */}
             <div className="flex items-center justify-between bg-neutral-50/50 p-3 rounded-xl border border-neutral-100">
-              <span className="text-xs font-semibold text-neutral-500">
-                Showing <strong className="text-neutral-900">{filteredProducts.length}</strong> products
-              </span>
+             
               
               <div className="flex items-center gap-2">
                 <span className="text-xs text-neutral-500 hidden sm:inline">Sort by:</span>
@@ -377,6 +387,31 @@ export default function ProductsPage() {
                                         product.image_variants.medium.trim() !== "";
 
                   const isTouched = activeCardId === product.id;
+
+                  const addProductToCart = () => {
+                    const priceCandidates = [
+                      product.sale_price,
+                      product.discount_price,
+                      product.retail_price,
+                    ];
+                    const price = priceCandidates
+                      .map(parsePrice)
+                      .find((candidate) => Number.isFinite(candidate) && candidate > 0);
+
+                    if (price === undefined) {
+                      console.error(`Could not determine a valid price for ${product.name}`);
+                      return;
+                    }
+
+                    addToCart({
+                      id: product.id,
+                      name: product.name,
+                      image: product.image,
+                      price,
+                      brand: product.brand,
+                      quantity: 1,
+                    });
+                  };
 
                   return (
                     <Card
@@ -429,13 +464,16 @@ export default function ProductsPage() {
                           <div className={`absolute inset-x-0 bottom-2 flex items-center justify-center gap-1.5 transition-all duration-300 z-20 px-2 ${
                             isTouched ? "opacity-100 transform translate-y-0" : "opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0"
                           }`}>
-                            <button 
-                              onClick={(e) => { e.stopPropagation(); alert(`Added to cart: ${product.name}`); }}
-                              aria-label="Add to cart" 
+                            <button
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                addProductToCart();
+                              }}
+                              aria-label={`Add ${product.name} to cart`}
                               className="w-7 h-7 md:w-9 md:h-9 bg-white/95 backdrop-blur text-neutral-800 hover:bg-rose-600 hover:text-white rounded-full flex items-center justify-center shadow-md transition-all transform hover:scale-105"
                             >
                               <ShoppingCart className="w-3 h-3 md:w-4 md:h-4" />
-                            </button>
+                            </button>   
                             <button 
                               onClick={(e) => { e.stopPropagation(); alert(`Quick view: ${product.name}`); }}
                               aria-label="Quick search view" 
@@ -449,7 +487,7 @@ export default function ProductsPage() {
                         {/* Product Info */}
                         <div className="space-y-0.5 md:space-y-1 text-left px-0.5">
                           <p className="text-[9px] md:text-xs text-pink-600 font-semibold tracking-wider uppercase truncate">
-                            {product.brand} • {product.category.split(',')[0]}
+                            {product.brand} • {product.category?.split(',')[0]}
                           </p>
 
                           <h3 className="text-xs md:text-sm font-bold text-neutral-800 line-clamp-2 leading-snug hover:text-pink-600 transition-colors">
@@ -462,7 +500,7 @@ export default function ProductsPage() {
                                 <Star
                                   key={i}
                                   className={`w-2.5 h-2.5 md:w-3 md:h-3 ${
-                                    i < Math.floor(product.review)
+                                    i < Math.floor(product.review || 0)
                                       ? "fill-amber-400 text-amber-400"
                                       : "text-neutral-200"
                                   }`}

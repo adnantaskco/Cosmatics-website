@@ -57,13 +57,14 @@ export default function VideoHero() {
           </video>
 
           {/* Dark Overlay for better contrast */}
-          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-foreground/10" />
 
           {/* Interactive Center Play/Pause Button */}
           <div className="absolute inset-0 flex items-center justify-center">
             <button
               onClick={togglePlayPause}
-              className="group relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white transition-all duration-300 hover:bg-white/30 hover:scale-105 shadow-lg"
+              className="group relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-D
+              /20 backdrop-blur-md border border-background/40 text-text-secondary transition-all duration-300 hover:bg-background/30 hover:scale-105 shadow-lg"
               aria-label={isPlaying ? "Pause video" : "Play video"}
             >
               {isPlaying ? (

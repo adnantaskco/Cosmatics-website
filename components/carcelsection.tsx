@@ -66,8 +66,8 @@ export function SynchronizedProductShowcase() {
   }
 
   return (
-    <section className="container mx-auto px-4 md:px-8 lg:px-16 py-6 sm:py-5 md:py-16 font-sans bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center border border-neutral-100 rounded-3xl lg:rounded-[2.5rem] p-4 sm:p-8 lg:p-12 shadow-xl shadow-neutral-100 bg-gradient-to-br from-neutral-50/80 via-white to-pink-50/20">
+    <section className="container mx-auto px-4 md:px-8 lg:px-16 py-6 sm:py-5 md:py-8  bg-background">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center border border-neutral-100 rounded-3xl lg:rounded-[2.5rem] p-4 sm:p-8 lg:p-12 shadow-xl shadow-neutral-100 bg-gradient-to-br from-neutral-50/80 via-background to-pink-50/20">
         
         {/* Left Side: Synchronized Editorial Image */}
         <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[450px] lg:h-[700px] overflow-hidden rounded-t-[100px] sm:rounded-t-[140px] lg:rounded-t-[160px] rounded-b-3xl bg-neutral-200 group">
@@ -84,7 +84,7 @@ export function SynchronizedProductShowcase() {
           
           <div className="w-full">
             {/* Product Image Container with Dual Hover Action Buttons */}
-            <div className="relative w-full h-[260px] sm:w-80 sm:h-96 lg:w-104 lg:h-120 mx-auto lg:mx-0  bg-white rounded-3xl p-2 border border-neutral-100 flex items-center justify-center group overflow-hidden">
+            <div className="relative w-full h-[260px] sm:w-80 sm:h-96 lg:w-104 lg:h-120 mx-auto lg:mx-0  bg-background rounded-3xl p-2 border border-neutral-100 flex items-center justify-center group overflow-hidden">
               
               <img
                 key={`product-${currentSlide.id}`}
@@ -94,12 +94,12 @@ export function SynchronizedProductShowcase() {
               />
 
               {/* Gorgeous Hover Overlay with Action Buttons */}
-              <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-2.5 p-4">
+              <div className="absolute inset-0 bg-foreground/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-2.5 p-4">
                 
                 {/* Quick Cart Button */}
                 <button 
                   onClick={(e) => handleQuickCart(currentSlide, e)}
-                  className="w-full max-w-[170px] bg-[#D90452] hover:bg-neutral-900 text-white text-xs font-bold tracking-wider uppercase py-2.5 px-4 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out cursor-pointer"
+                  className="w-full max-w-[170px] bg-primary hover:bg-neutral-900 text-text-secondary text-xs font-bold tracking-wider uppercase py-2.5 px-4 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-out cursor-pointer"
                 >
                   Quick Cart
                 </button>
@@ -107,7 +107,7 @@ export function SynchronizedProductShowcase() {
                 {/* Quick View Button */}
                 <button 
                   onClick={(e) => handleQuickView(currentSlide, e)}
-                  className="w-full max-w-[170px] bg-white hover:bg-neutral-100 text-neutral-900 text-xs font-bold tracking-wider uppercase py-2.5 px-4 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 ease-out cursor-pointer"
+                  className="w-full max-w-[170px] bg-background hover:bg-neutral-100 text-neutral-900 text-xs font-bold tracking-wider uppercase py-2.5 px-4 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75 ease-out cursor-pointer"
                 >
                   Quick View
                 </button>
@@ -119,7 +119,7 @@ export function SynchronizedProductShowcase() {
             <div className="space-y-1.5 lg:space-y-2 mb-6 lg:mb-8">
               <a 
                 href={currentSlide.productUrl}
-                className="text-lg sm:text-xl lg:text-2xl font-black text-neutral-900 hover:text-[#D90452] transition-colors"
+                className="text-lg sm:text-xl lg:text-2xl font-black text-neutral-900 hover:text-primary transition-colors"
               >
                 {currentSlide.productName}
               </a>
@@ -137,7 +137,7 @@ export function SynchronizedProductShowcase() {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    currentIndex === index ? "w-8 sm:w-10 bg-[#D90452]" : "w-2 sm:w-2.5 bg-neutral-300 hover:bg-neutral-400"
+                    currentIndex === index ? "w-8 sm:w-10 bg-primary" : "w-2 sm:w-2.5 bg-neutral-300 hover:bg-neutral-400"
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -147,14 +147,14 @@ export function SynchronizedProductShowcase() {
             <div className="flex gap-2.5 sm:gap-3">
               <button
                 onClick={handlePrev}
-                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-700 hover:bg-neutral-900 hover:text-white hover:border-neutral-900 transition-all shadow-sm cursor-pointer"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-700 hover:bg-neutral-900 hover:text-text-secondary hover:border-neutral-900 transition-all shadow-sm cursor-pointer"
                 aria-label="Previous item"
               >
                 ←
               </button>
               <button
                 onClick={handleNext}
-                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-700 hover:bg-neutral-900 hover:text-white hover:border-neutral-900 transition-all shadow-sm cursor-pointer"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-700 hover:bg-neutral-900 hover:text-text-secondary hover:border-neutral-900 transition-all shadow-sm cursor-pointer"
                 aria-label="Next item"
               >
                 →

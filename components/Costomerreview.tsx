@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function CustomerTestimonials() {
@@ -43,6 +43,7 @@ export default function CustomerTestimonials() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const dragStartX = useRef<number | null>(null);
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
@@ -52,8 +53,26 @@ export default function CustomerTestimonials() {
     setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
   };
 
+  // Drag / Swipe Handlers
+  const handleDragStart = (clientX: number) => {
+    dragStartX.current = clientX;
+  };
+
+  const handleDragEnd = (clientX: number) => {
+    if (dragStartX.current === null) return;
+    const diff = dragStartX.current - clientX;
+    const threshold = 50; // Minimum distance for a swipe action
+
+    if (diff > threshold) {
+      nextSlide(); // Dragged left -> Next
+    } else if (diff < -threshold) {
+      prevSlide(); // Dragged right -> Previous
+    }
+    dragStartX.current = null;
+  };
+
   return (
-    <section className="bg-neutral-50 py-6 sm:py-5 md:py-20">
+    <section className="bg-neutral-50 py-6 sm:py-5 md:py-20 select-none">
       <div className="container mx-auto px-4 md:px-8 lg:px-16 text-center">
         {/* Main Title */}
         <h2 className="text-lg md:text-2xl font-bold tracking-tight bg-gradient-to-r from-neutral-900 to-rose-900 bg-clip-text text-transparent uppercase">
@@ -65,8 +84,14 @@ export default function CustomerTestimonials() {
           Real feedback from customers who trust our beauty essentials.
         </p>
 
-        {/* Carousel Container: 2 columns on mobile and desktop */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-6 items-stretch">
+        {/* Draggable Carousel Container */}
+        <div 
+          className="grid grid-cols-2 gap-3 sm:gap-6 items-stretch cursor-grab active:cursor-grabbing touch-pan-y"
+          onMouseDown={(e) => handleDragStart(e.clientX)}
+          onMouseUp={(e) => handleDragEnd(e.clientX)}
+          onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
+          onTouchEnd={(e) => handleDragEnd(e.changedTouches[0].clientX)}
+        >
           {testimonials.map((item, index) => {
             const isVisible = index === currentIndex || index === (currentIndex + 1) % testimonials.length;
             if (!isVisible) return null;
@@ -74,7 +99,7 @@ export default function CustomerTestimonials() {
             return (
               <div
                 key={index}
-                className="flex flex-col sm:flex-row bg-white rounded-xl shadow-sm border border-neutral-100 p-3 sm:p-6 text-left transition-all duration-300"
+                className="flex flex-col sm:flex-row bg-background rounded-xl shadow-sm border border-neutral-100 p-3 sm:p-6 text-left transition-all duration-300 pointer-events-none"
               >
                 {/* Customer Image */}
                 <div className="w-full sm:w-28 h-28 sm:h-auto flex-shrink-0 mb-3 sm:mb-0 sm:mr-4">
@@ -82,6 +107,7 @@ export default function CustomerTestimonials() {
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover rounded-lg"
+                    draggable="false"
                   />
                 </div>
 

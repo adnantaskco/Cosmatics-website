@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import { useCart } from './context/CartContext';
 
 interface ImageVariants {
   thumbnail?: string;
@@ -294,13 +295,22 @@ const forYouTabsData: ForYouTabsData = {
   ]
 };
 
+function parsePrice(value: string | undefined): number {
+  if (!value) return Number.NaN
+
+  // Handles values such as "৳ 1,200", "$12.50", or "1200".
+  const normalized = value.replace(/,/g, "").replace(/[^\d.-]/g, "")
+  return normalized ? Number(normalized) : Number.NaN
+}
+
 export default function ForYouTabCarouselSection() {
   const [activeTab, setActiveTab] = useState<string>("FORYOU");
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
   const currentProducts = forYouTabsData[activeTab] || forYouTabsData["FORYOU"];
+    const { addToCart } = useCart();
 
   return (
-    <section className="w-full container mx-auto px-4 md:px-8 lg:px-16 py-12 bg-gradient-to-b from-white to-rose-50/20 font-sans">
+    <section className="w-full container mx-auto px-4 md:px-8 lg:px-16 py-12 bg-gradient-to-b from-background to-black/20 ">
       <Carousel
         opts={{
           align: "start",
@@ -309,7 +319,7 @@ export default function ForYouTabCarouselSection() {
         className="w-full relative"
       >
         {/* Header & X-Axis Scrollable Tab Navigation */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-8 border-b border-rose-100 gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 mb-8 border-b border-primary/20 gap-4">
           <div className="flex items-center gap-2 sm:gap-8 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {[
               { key: "FORYOU", label: "FOR YOU" },
@@ -322,19 +332,19 @@ export default function ForYouTabCarouselSection() {
                 onClick={() => setActiveTab(tab.key)}
                 className={`text-xs md:text-sm font-extrabold tracking-wider uppercase pb-2 border-b-2 transition-all whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
                   activeTab === tab.key 
-                    ? "border-rose-600 text-neutral-900 scale-105" 
+                    ? "border-primary text-neutral-900 scale-105" 
                     : "border-transparent text-neutral-400 hover:text-neutral-700"
                 }`}
               >
-                {activeTab === tab.key && <Sparkles className="w-3.5 h-3.5 text-rose-600 animate-pulse" />}
+                {activeTab === tab.key && <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" />}
                 {tab.label}
               </button>
             ))}
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <CarouselPrevious className="static translate-y-0 h-9 w-9 rounded-full border border-rose-200 bg-white hover:bg-rose-600 hover:text-white hover:border-rose-600 text-neutral-800 transition-all shadow-sm" />
-            <CarouselNext className="static translate-y-0 h-9 w-9 rounded-full border border-rose-200 bg-white hover:bg-rose-600 hover:text-white hover:border-rose-600 text-neutral-800 transition-all shadow-sm" />
+            <CarouselPrevious className="static translate-y-0 h-9 w-9 rounded-full border border-primary/20 bg-background hover:bg-primary hover:text-text-secondary hover:border-primary text-neutral-800 transition-all shadow-sm" />
+            <CarouselNext className="static translate-y-0 h-9 w-9 rounded-full border border-primary/20 bg-background hover:bg-primary hover:text-text-secondary hover:border-primary text-neutral-800 transition-all shadow-sm" />
           </div>
         </div>
 
@@ -347,25 +357,52 @@ export default function ForYouTabCarouselSection() {
 
             const isTouched = activeCardId === product.id;
 
+            const addProductToCart = () => {
+            const priceCandidates = [
+              product.sale_price,
+              product.discount_price,
+              product.retail_price,
+            ]
+            const price = priceCandidates
+              .map(parsePrice)
+              .find((candidate) => Number.isFinite(candidate))
+
+            if (price === undefined) {
+              console.error(`Could not determine a valid price for ${product.name}`)
+              return
+            }
+
+            addToCart({
+              id: product.id,
+              name: product.name,
+              image: product.image,
+              price,
+              brand: product.brand,
+              quantity: 1,
+            })
+          }
+
+
+
             return (
               <CarouselItem key={product.id} className="pl-3 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
                 <Card
                   onClick={() => setActiveCardId(isTouched ? null : product.id)}
-                  className="group relative bg-white rounded-2xl border border-neutral-100/80 shadow-sm hover:shadow-xl hover:border-pink-200 flex flex-col justify-between p-2.5 md:p-3.5 transition-all duration-300 overflow-hidden cursor-pointer h-full"
+                  className="group relative bg-background rounded-2xl border border-ring/50 shadow-sm hover:shadow-xl hover:border-primary/40 flex flex-col justify-between p-2.5 md:p-3.5 transition-all duration-300 overflow-hidden cursor-pointer h-full"
                 >
                   <div>
                     {/* Product Image & Floating Action Hub */}
-                    <div className="relative w-full aspect-square bg-gradient-to-b from-neutral-50/80 to-neutral-100/50 rounded-xl overflow-hidden mb-2">
+                    <div className="relative w-full aspect-square bg-gradient-to-b from-ring/10 to-ring/80 rounded-xl overflow-hidden mb-2">
                       
                       {/* Badges Container */}
                       <div className="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
                         {product.has_discount && product.discount && (
-                          <span className="bg-gradient-to-r from-pink-600 to-rose-500 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider px-1.5 py-0.5 rounded-full shadow-md shadow-pink-500/20">
+                          <span className="bg-gradient-to-r from-primary to-primary/80 text-text-secondary text-[9px] md:text-[10px] font-extrabold tracking-wider px-1.5 py-0.5 rounded-full  shadow-primary/20">
                             {product.discount}
                           </span>
                         )}
                         {product.isNew && (
-                          <span className="bg-emerald-600 text-white text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+                          <span className="bg-emerald-600 text-text-secondary text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">
                             NEW
                           </span>
                         )}
@@ -374,7 +411,7 @@ export default function ForYouTabCarouselSection() {
                       {/* Quick Wishlist Icon */}
                       <button 
                         aria-label="Add to wishlist"
-                        className={`absolute top-2 right-2 z-20 w-7 h-7 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-neutral-500 hover:text-pink-600 hover:bg-white shadow-sm transition-all ${
+                        className={`absolute top-2 right-2 z-20 w-7 h-7 bg-background/80 backdrop-blur-md rounded-full flex items-center justify-center text-neutral-500 hover:text-primary hover:bg-background shadow-sm transition-all ${
                           isTouched ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                         }`}
                       >
@@ -405,17 +442,20 @@ export default function ForYouTabCarouselSection() {
                       <div className={`absolute inset-x-0 bottom-2 flex items-center justify-center gap-1.5 transition-all duration-300 z-20 px-2 ${
                         isTouched ? "opacity-100 transform translate-y-0" : "opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0"
                       }`}>
-                        <button 
-                          onClick={(e) => { e.stopPropagation(); alert(`Added to cart: ${product.name}`); }}
-                          aria-label="Add to cart" 
-                          className="w-7 h-7 md:w-9 md:h-9 bg-white/95 backdrop-blur text-neutral-800 hover:bg-rose-600 hover:text-white rounded-full flex items-center justify-center shadow-md transition-all transform hover:scale-105"
-                        >
-                          <ShoppingCart className="w-3 h-3 md:w-4 md:h-4" />
-                        </button>
+                      <button
+                      onClick={(event) => {
+                        event.stopPropagation()
+                        addProductToCart()
+                      }}
+                      aria-label={`Add ${product.name} to cart`}
+                      className="w-7 h-7 md:w-9 md:h-9 bg-background/95 backdrop-blur text-neutral-800 hover:bg-primary hover:text-text-secondary rounded-full flex items-center justify-center  transition-all transform hover:scale-105"
+                    >
+                      <ShoppingCart className="w-3 h-3 md:w-4 md:h-4" />
+                    </button>
                         <button 
                           onClick={(e) => { e.stopPropagation(); alert(`Quick view: ${product.name}`); }}
                           aria-label="Quick search view" 
-                          className="w-7 h-7 md:w-9 md:h-9 bg-white/95 backdrop-blur text-neutral-800 hover:bg-rose-600 hover:text-white rounded-full flex items-center justify-center shadow-md transition-all transform hover:scale-105"
+                          className="w-7 h-7 md:w-9 md:h-9 bg-background/95 backdrop-blur text-neutral-800 hover:bg-primary hover:text-text-secondary rounded-full flex items-center justify-center  transition-all transform hover:scale-105"
                         >
                           <Search className="w-3 h-3 md:w-4 md:h-4" />
                         </button>
@@ -424,11 +464,11 @@ export default function ForYouTabCarouselSection() {
 
                     {/* Product Info */}
                     <div className="space-y-0.5 md:space-y-1 text-left px-0.5">
-                      <p className="text-[9px] md:text-xs text-pink-600 font-semibold tracking-wider uppercase truncate">
+                      <p className="text-[9px] md:text-xs text-primary font-semibold tracking-wider uppercase truncate">
                         {product.brand} • {product.category.split(',')[0]}
                       </p>
 
-                      <h3 className="text-xs md:text-sm font-bold text-neutral-800 line-clamp-2 leading-snug hover:text-pink-600 transition-colors">
+                      <h3 className="text-xs md:text-sm font-bold text-neutral-800 line-clamp-2 leading-snug hover:text-primary transition-colors">
                         <a href={product.productUrl || `/products/${product.slug}`}>{product.name}</a>
                       </h3>
 

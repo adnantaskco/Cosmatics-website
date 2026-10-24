@@ -68,7 +68,7 @@ export default function HeroSection2() {
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-1.5">
 
         {/* Left Side Banner */}
-        <div className="md:col-span-2 lg:col-span-3 rounded-2xl hidden md:block overflow-hidden  bg-gray-100">
+        <div className="md:col-span-2 lg:col-span-3 rounded-2xl hidden md:block overflow-hidden  bg-background">
           <img 
             src="https://i.pinimg.com/1200x/7a/23/e6/7a23e61ef01cd3b32e119919eae87535.jpg" 
             alt="App Banner" 
@@ -78,7 +78,7 @@ export default function HeroSection2() {
 
         {/* Center Dynamic Carousel Banner */}
         <div 
-          className="md:col-span-2 lg:col-span-6 rounded-2xl overflow-hidden shadow-sm relative group min-h-[30px] max-h-[420px] bg-gray-100 cursor-grab active:cursor-grabbing select-none"
+          className="md:col-span-2 lg:col-span-6 rounded-2xl overflow-hidden shadow-sm relative group min-h-[30px] max-h-[420px] bg-background cursor-grab active:cursor-grabbing select-none"
           onMouseDown={(e) => handlePointerDown(e.clientX)}
           onMouseUp={(e) => handlePointerUp(e.clientX)}
           onTouchStart={(e) => handlePointerDown(e.touches[0].clientX)}
@@ -116,7 +116,7 @@ export default function HeroSection2() {
                 key={index}
                 onClick={(e) => { e.stopPropagation(); setCurrentIndex(index); }}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  currentIndex === index ? 'w-6 bg-emerald-600' : 'w-2.5 bg-white/70'
+                  currentIndex === index ? 'w-6 bg-emerald-600' : 'w-2.5 bg-background/70'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -126,7 +126,7 @@ export default function HeroSection2() {
 
         {/* Right Side Stacked Banners */}
         <div className="md:col-span-4 lg:col-span-3 flex flex-row sm:flex-row lg:flex-col gap-1.5 justify-between">
-          <div className="w-1/2 sm:w-1/2 lg:w-full rounded-2xl overflow-hidden shadow-sm bg-gray-100">
+          <div className="w-1/2 sm:w-1/2 lg:w-full rounded-2xl overflow-hidden shadow-sm bg-background">
             <img
               src="https://i.pinimg.com/736x/f9/6b/3a/f96b3a1b4e1c70342fe50701da3bf7c5.jpg"
               alt="Summer Flavors"
@@ -134,11 +134,11 @@ export default function HeroSection2() {
             />
           </div>
 
-          <div className="w-1/2 sm:w-1/2 lg:w-full rounded-2xl overflow-hidden shadow-sm bg-gray-100">
+          <div className="w-1/2 sm:w-1/2 lg:w-full rounded-2xl overflow-hidden shadow-sm bg-background">
             <img
               src="https://i.pinimg.com/736x/7e/73/a7/7e73a78478b4dc526453e66411fe6dc5.jpg"
               alt="Fresh Veggies"
-              className="w-full h-32 sm:h-40 md:h-48 lg:h-[208px] object-cover rounded-2xl block"
+              className="w-full h-32 sm:h-40 md:h-48 lg:h-[208px]  rounded-2xl block "
             />
           </div>
         </div>
