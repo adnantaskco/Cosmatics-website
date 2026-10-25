@@ -70,7 +70,7 @@ export function SynchronizedProductShowcase() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center border border-neutral-100 rounded-3xl lg:rounded-[2.5rem] p-4 sm:p-8 lg:p-12 shadow-xl shadow-neutral-100 bg-gradient-to-br from-neutral-50/80 via-background to-pink-50/20">
         
         {/* Left Side: Synchronized Editorial Image */}
-        <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[450px] lg:h-[700px] overflow-hidden rounded-t-[100px] sm:rounded-t-[140px] lg:rounded-t-[160px] rounded-b-3xl bg-neutral-200 group">
+        <div className="lg:col-span-6 relative w-full h-[350px] sm:h-[350px] lg:h-[600px] overflow-hidden rounded-t-[100px] sm:rounded-t-[140px] lg:rounded-t-[160px] rounded-b-3xl bg-neutral-200 group">
           <img
             key={`model-${currentSlide.id}`}
             src={currentSlide.modelImageUrl}

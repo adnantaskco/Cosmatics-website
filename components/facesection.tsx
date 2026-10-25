@@ -124,7 +124,7 @@ export default function FaceAutoCarousel() {
 
       <div className="relative w-full h-[150px] sm:h-[150px] md:h-[350px] overflow-hidden bg-background">
         <img 
-            src="https://plain-apac-prod-public.komododecks.com/202610/25/aATg33K6tkZEyqpocv4a/image.jpg" 
+            src="https://plain-apac-prod-public.komododecks.com/202610/25/d7aQqHSe6DoP39EU8OQx/image.jpg" 
             alt="Skin Collection Banner" 
             className="absolute inset-0 w-full h-full "
         />
