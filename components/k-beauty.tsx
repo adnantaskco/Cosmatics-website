@@ -121,7 +121,7 @@ export default function KBeautyAutoCarousel() {
         </a>
       </div>
 
-      <div className="relative w-full h-[350px] sm:h-[200px] md:h-[350px]  overflow-hidden bg-rose-50 ">
+      <div className="relative w-full h-[150px] sm:h-[150px] md:h-[350px]  overflow-hidden bg-rose-50 ">
         <img 
             src="https://plain-apac-prod-public.komododecks.com/202610/24/TNqW3tLLp4ywmXFGcMhr/image.jpg" 
             alt="K-Beauty Glass Skin Collection Banner" 

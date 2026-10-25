@@ -244,7 +244,7 @@ export const ALL_PRODUCTS = [
     discount: "-20%",
   },
   {
-    id: 22,
+    id: 21,
     name: 'Cosrx – Advanced Snail 96 Mucin Power Essence',
     category: 'Face Care, Essence & Serum',
     brand: 'Cosrx',

@@ -1,7 +1,7 @@
 
 export const DatafaceSkinCareProducts = [
   {
-    id: 22,
+    id: 21,
     name: 'Cosrx – Advanced Snail 96 Mucin Power Essence',
     category: 'Face Care, Essence & Serum',
     brand: 'Cosrx',

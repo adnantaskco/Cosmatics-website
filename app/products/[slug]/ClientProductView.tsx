@@ -60,7 +60,7 @@ export default function ClientProductView({ product }: { product: Product | unde
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 text-gray-800 px-4 text-center">
         <h1 className="text-2xl font-bold mb-2">Product Not Found</h1>
         <p className="text-gray-500 mb-6 text-sm">The product you are looking for doesn't exist.</p>
-        <Link href="/" className="bg-red-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-red-700 transition shadow-sm">
+        <Link href="/" className="bg-primary text-white px-6 py-2.5 rounded-xl font-medium hover:bg-red-700 transition shadow-sm">
           Back to Home
         </Link>
       </div>
@@ -127,7 +127,7 @@ export default function ClientProductView({ product }: { product: Product | unde
           </div>
           <Link 
             href="/cart" 
-            className="ml-3 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition"
+            className="ml-3 bg-primary hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition"
           >
             View Cart
           </Link>
@@ -136,9 +136,9 @@ export default function ClientProductView({ product }: { product: Product | unde
 
       {/* Breadcrumb Navigation */}
       <div className="container mx-auto px-4 md:px-8 lg:px-16 py-3 sm:py-4 text-xs sm:text-sm text-gray-500 flex items-center gap-1.5 overflow-x-auto whitespace-nowrap">
-        <Link href="/" className="hover:text-red-600 transition">Home</Link>
+        <Link href="/" className="hover:text-primary transition">Home</Link>
         <ChevronRight className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" />
-        <Link href="/shop" className="hover:text-red-600 transition">{product.category || 'Shop'}</Link>
+        <Link href="/shop" className="hover:text-primary transition">{product.category || 'Shop'}</Link>
         <ChevronRight className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" />
         <span className="text-gray-900 font-semibold truncate max-w-[220px] sm:max-w-none">{product.name}</span>
       </div>
@@ -149,7 +149,7 @@ export default function ClientProductView({ product }: { product: Product | unde
         <div className="lg:col-span-6 flex flex-col gap-4">
           <div className="relative aspect-square w-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl overflow-hidden border border-gray-200/80 flex items-center justify-center p-4 group">
             {product.has_discount && product.discount && (
-              <span className="absolute top-4 left-4 z-10 bg-red-600 text-white text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg tracking-wide uppercase">
+              <span className="absolute top-4 left-4 z-10 bg-primary text-white text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg tracking-wide uppercase">
                 {product.discount} OFF
               </span>
             )}
@@ -163,17 +163,17 @@ export default function ClientProductView({ product }: { product: Product | unde
           {/* Value Propositions Grid */}
           <div className="grid grid-cols-3 gap-3 pt-2">
             <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-gray-50 border border-gray-100">
-              <ShieldCheck className="w-5 h-5 text-red-600 mb-1" />
+              <ShieldCheck className="w-5 h-5 text-primary mb-1" />
               <span className="text-[11px] font-bold text-gray-900">100% Authentic</span>
               <span className="text-[10px] text-gray-500">Directly Sourced</span>
             </div>
             <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-gray-50 border border-gray-100">
-              <Truck className="w-5 h-5 text-red-600 mb-1" />
+              <Truck className="w-5 h-5 text-primary mb-1" />
               <span className="text-[11px] font-bold text-gray-900">Fast Delivery</span>
               <span className="text-[10px] text-gray-500">24-48 Hours</span>
             </div>
             <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-gray-50 border border-gray-100">
-              <RefreshCw className="w-5 h-5 text-red-600 mb-1" />
+              <RefreshCw className="w-5 h-5 text-primary mb-1" />
               <span className="text-[11px] font-bold text-gray-900">Easy Returns</span>
               <span className="text-[10px] text-gray-500">7-Day Guarantee</span>
             </div>
@@ -184,7 +184,7 @@ export default function ClientProductView({ product }: { product: Product | unde
         <div className="lg:col-span-6 flex flex-col gap-5">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold tracking-widest text-red-600 uppercase bg-red-50 px-3 py-1 rounded-full border border-red-100">
+              <span className="text-xs font-bold tracking-widest text-primary uppercase bg-red-50 px-3 py-1 rounded-full border border-red-100">
                 {product.brand}
               </span>
               <span className="text-xs text-gray-400 font-mono">SKU: {product.sku}</span>
@@ -206,7 +206,7 @@ export default function ClientProductView({ product }: { product: Product | unde
           <div className="flex flex-col gap-2 bg-gradient-to-r from-red-50 to-orange-50/40 border border-red-100 p-3.5 rounded-2xl text-xs font-medium text-red-900">
             {product.stock_qty <= 15 && product.in_stock && (
               <div className="flex items-center gap-2 text-red-700 font-semibold">
-                <Zap className="w-4 h-4 text-red-600 fill-red-600 animate-pulse flex-shrink-0" />
+                <Zap className="w-4 h-4 text-primary fill-primary animate-pulse flex-shrink-0" />
                 <span>Hurry! Only {product.stock_qty} units left in stock at this promotional price.</span>
               </div>
             )}
@@ -267,7 +267,7 @@ export default function ClientProductView({ product }: { product: Product | unde
                 className={`flex-1 font-bold py-3.5 px-4 sm:px-6 rounded-2xl shadow-lg transition-all duration-300 flex items-center justify-center gap-2.5 text-sm sm:text-base cursor-pointer ${
                   isAdded 
                     ? 'bg-emerald-600 hover:bg-emerald-700 text-white scale-[1.02]' 
-                    : 'bg-red-600 hover:bg-red-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed shadow-red-600/20'
+                    : 'bg-primary hover:bg-red-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed shadow-primary/20'
                 }`}
               >
                 {isAdded ? (
@@ -321,25 +321,25 @@ export default function ClientProductView({ product }: { product: Product | unde
         <div className="flex border-b border-gray-200 gap-6 sm:gap-10 overflow-x-auto scrollbar-none">
           <button 
             onClick={() => setActiveTab('description')}
-            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'description' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'description' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
           >
             Product Description
           </button>
           <button 
             onClick={() => setActiveTab('info')}
-            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'info' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'info' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
           >
             Additional Specifications
           </button>
           <button 
             onClick={() => setActiveTab('reviews')}
-            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'reviews' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'reviews' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
           >
             Customer Reviews ({product.review ? Math.round(product.review * 40) : 182})
           </button>
           <button 
             onClick={() => setActiveTab('shipping')}
-            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'shipping' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+            className={`pb-3.5 font-bold text-sm sm:text-base border-b-2 transition whitespace-nowrap cursor-pointer ${activeTab === 'shipping' ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
           >
             Shipping & Return Policy
           </button>
@@ -351,14 +351,14 @@ export default function ClientProductView({ product }: { product: Product | unde
               <div>
                 <h3 className="font-extrabold text-gray-900 text-lg mb-2">About {product.name}</h3>
                 <p className="text-gray-600">
-                  Experience superior skin care with authentic products sourced directly from premium brands. Formulated by <strong>{product.brand}</strong> under category <span className="text-red-600 font-semibold">{product.category}</span>, this item guarantees maximum results for your daily cosmetic regimen without harsh chemicals.
+                  Experience superior skin care with authentic products sourced directly from premium brands. Formulated by <strong>{product.brand}</strong> under category <span className="text-primary font-semibold">{product.category}</span>, this item guarantees maximum results for your daily cosmetic regimen without harsh chemicals.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-6 rounded-2xl border border-gray-100">
                 <div>
                   <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-red-600" /> Key Highlights & Benefits
+                    <Sparkles className="w-4 h-4 text-primary" /> Key Highlights & Benefits
                   </h4>
                   <ul className="space-y-2 text-xs sm:text-sm text-gray-600 list-disc pl-4">
                     <li>Dermatologically tested and safe for sensitive skin types.</li>
@@ -369,7 +369,7 @@ export default function ClientProductView({ product }: { product: Product | unde
                 </div>
                 <div>
                   <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-red-600" /> Recommended Usage
+                    <ShieldCheck className="w-4 h-4 text-primary" /> Recommended Usage
                   </h4>
                   <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                     Apply an appropriate amount evenly across cleansed skin as part of your morning and evening skincare routine. Gently pat until fully absorbed. Follow up with your favorite sunscreen during daytime application.
@@ -505,7 +505,7 @@ export default function ClientProductView({ product }: { product: Product | unde
                 className="bg-white border border-gray-100 rounded-3xl p-4 hover:shadow-lg transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
               >
                 {item.has_discount && item.discount && (
-                  <span className="absolute top-3 left-3 z-10 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md">
+                  <span className="absolute top-3 left-3 z-10 bg-primary text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md">
                     {item.discount}
                   </span>
                 )}
@@ -518,8 +518,8 @@ export default function ClientProductView({ product }: { product: Product | unde
                       className="object-contain w-full h-full group-hover:scale-105 transition duration-300"
                     />
                   </div>
-                  <span className="text-[10px] sm:text-[11px] font-bold text-red-600 uppercase tracking-widest block">{item.brand}</span>
-                  <h4 className="font-semibold text-xs sm:text-sm text-gray-800 group-hover:text-red-600 transition line-clamp-2 mt-1">
+                  <span className="text-[10px] sm:text-[11px] font-bold text-primary uppercase tracking-widest block">{item.brand}</span>
+                  <h4 className="font-semibold text-xs sm:text-sm text-gray-800 group-hover:text-primary transition line-clamp-2 mt-1">
                     {item.name}
                   </h4>
                 </Link>
@@ -538,7 +538,7 @@ export default function ClientProductView({ product }: { product: Product | unde
                   
                   <Link 
                     href={`/products/${item.slug}`}
-                    className="bg-red-50 hover:bg-red-600 text-red-600 hover:text-white p-2.5 rounded-xl transition shadow-sm"
+                    className="bg-red-50 hover:bg-primary text-primary hover:text-white p-2.5 rounded-xl transition shadow-sm"
                     aria-label="View product"
                   >
                     <ShoppingCart className="w-4 h-4" />

@@ -425,7 +425,7 @@ export default function Navbar() {
                       <h4 className="font-bold  mb-3 text-xs tracking-wider uppercase border-b border-ring/10 pb-2 text-primary">K-Beauty Icons</h4>
                       <ul className="space-y-2 text-xs text-gray-600">
                         {brandColumns.col1.map((brand, idx) => (
-                          <li key={idx}><a href={`#${brand.toLowerCase()}`} className="hover:text-primary transition block font-medium">{brand}</a></li>
+                          <li key={idx}><a href={`/${brand.toLowerCase()}`} className="hover:text-primary transition block font-medium">{brand}</a></li>
                         ))}
                       </ul>
                     </div>
@@ -433,7 +433,7 @@ export default function Navbar() {
                       <h4 className="font-bold  mb-3 text-xs tracking-wider uppercase border-b border-ring/10 pb-2 text-primary">Luxury & Skincare</h4>
                       <ul className="space-y-2 text-xs text-ring">
                         {brandColumns.col2.map((brand, idx) => (
-                          <li key={idx}><a href={`#${brand.toLowerCase()}`} className="hover:text-primary transition block font-medium">{brand}</a></li>
+                          <li key={idx}><a href={`/${brand.toLowerCase()}`} className="hover:text-primary transition block font-medium">{brand}</a></li>
                         ))}
                       </ul>
                     </div>
@@ -441,7 +441,7 @@ export default function Navbar() {
                       <h4 className="font-bold  mb-3 text-xs tracking-wider uppercase border-b border-ring/10 pb-2 text-primary">Trendy Makeup</h4>
                       <ul className="space-y-2 text-xs text-ring">
                         {brandColumns.col3.map((brand, idx) => (
-                          <li key={idx}><a href={`#${brand.toLowerCase()}`} className="hover:text-primary transition block font-medium">{brand}</a></li>
+                          <li key={idx}><a href={`/${brand.toLowerCase()}`} className="hover:text-primary transition block font-medium">{brand}</a></li>
                         ))}
                       </ul>
                     </div>
@@ -452,9 +452,14 @@ export default function Navbar() {
               <Link href="/contactus" className="hover:text-primary transition py-1">CONTACT US</Link>
             </nav>
 
-            <div className="text-xs text-ring font-medium hidden xl:block">
-              <span>🔥 100% Authentic Store</span>
-            </div>
+            <div className="flex items-center gap-2 font-semibold text-sm tracking-widest text-ring">
+          <img
+            src="https://i.pinimg.com/474x/e7/b5/72/e7b572bfce4096bae0fc40883effedb4.jpg"
+            alt="Authentic"
+            className="h-20 w-20 shrink-0 object-contain"
+          />
+          <span>100% Authentic Store</span>
+        </div>
 
           </div>
         </div>
