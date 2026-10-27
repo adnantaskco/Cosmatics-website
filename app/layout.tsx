@@ -4,7 +4,7 @@ import "./globals.css";
 import logo from "../lib/icon.jpg";
 
 import Footer from "../components/footer";
-import  Navbar  from "@/components/navbar2";
+import Navbar from "@/components/navbar2";
 import { CartProvider } from "@/components/context/CartContext";
 import SideCart from "@/components/SideCart";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "Taskco | E-commerce Cosmatics Store",
   description: "E-commerce cosmatics store",
   icons: {
-    icon: logo.src, // Uses the imported logo image source
+    icon: logo.src,
   },
 };
 
@@ -35,9 +35,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <Navbar />
-
+        {/* Wrap CartProvider around everything that needs access to the cart */}
         <CartProvider>
+          <Navbar />
           {children}
           <SideCart />
         </CartProvider>

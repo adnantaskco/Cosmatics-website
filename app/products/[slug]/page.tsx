@@ -1,18 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import { ALL_PRODUCTS } from '@/lib/DataALLProducts';
+import { ALL_PRODUCTS } from '@/lib/DetailsProductData';
 import ClientProductView from './ClientProductView';
 
-export const instant = false; // Allows blocking route behavior
+export const instant = false; 
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const productSlug = resolvedParams.slug;
 
-  // Safely find the product while handling potential undefined elements in the dataset
-  const product = (ALL_PRODUCTS as (typeof ALL_PRODUCTS[number] | undefined)[]).find(
-    (p) => p !== undefined && p.slug === productSlug
-  );
+  // Flatten and normalize items to safely handle both wrapped and unwrapped data structures
+  const flatProducts = (ALL_PRODUCTS as any[]).flatMap(item => {
+    if (item?.data && Array.isArray(item.data)) return item.data;
+    if (item?.data) return [item.data];
+    return [item];
+  });
+
+  const product = flatProducts.find((p) => p?.slug === productSlug);
 
   if (!product) {
     return (

@@ -88,7 +88,7 @@ export default function HeroSection2() {
             <img 
               src={mainBanners[currentIndex].image} 
               alt={mainBanners[currentIndex].title} 
-              className="w-full h-full object-cover transition-all duration-500 ease-in-out pointer-events-none rounded-2xl"
+              className="w-full h-full  transition-all duration-500 ease-in-out pointer-events-none rounded-2xl"
             />
           </div>
 

@@ -22,7 +22,7 @@ export default function VideoHero() {
     <>
       <div>
         {/* Glorious Header Banner */}
-        <div className="container mx-auto px-4 md:px-8 lg:px-16 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 md:mb-8 pb-3 md:pb-4 border-b border-rose-100">
+        {/* <div className="container mx-auto px-4 md:px-8 lg:px-16 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 md:mb-8 pb-3 md:pb-4 border-b border-rose-100">
           <div className="flex items-center gap-2.5">
             <span className="p-2 bg-rose-50 text-rose-600 rounded-xl shadow-inner shrink-0">
               <Sparkles className="w-5 h-5 animate-pulse" />
@@ -40,9 +40,9 @@ export default function VideoHero() {
           >
             View All <span className="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
           </a>
-        </div>
+        </div> */}
 
-        <section className="relative w-full h-[350px] sm:h-[200px] md:h-[350px] overflow-hidden bg-neutral-900">
+        <section className="relative w-full h-[150px] sm:h-[150px] md:h-[350px] overflow-hidden bg-neutral-900">
           {/* Background Video */}
           <video
             ref={videoRef}
@@ -50,7 +50,7 @@ export default function VideoHero() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-90"
+            className="absolute inset-0 w-full h-full  object-cover opacity-90"
           >
             <source src="https://cdn.shopify.com/videos/c/o/v/651918d657ae477e97cc37cccf705bc4.mp4" />
             Your browser does not support the video tag.

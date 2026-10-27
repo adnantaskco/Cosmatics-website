@@ -1006,4 +1006,5 @@ export const ALL_PRODUCTS = [
       isNew: true,
       productUrl: ""
     },
+    
 ]

@@ -25,8 +25,8 @@ export default function CartPage() {
   const grandTotal = totalPrice + deliveryCharge;
 
   return (
-    <div className="min-h-screen bg-background text-text-primary font-sans p-3 sm:p-6 md:p-8 pb-28 sm:pb-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-background text-text-primary font-sans p-3 ">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
         {/* Header Navigation */}
         <div className="flex items-center justify-between mb-4 sm:mb-6">
           <div className="flex items-center gap-2 sm:gap-3">
@@ -37,8 +37,8 @@ export default function CartPage() {
             >
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
-            <h1 className="text-lg sm:text-2xl font-bold text-text-primary">
-              Shopping Cart ({totalItems} {totalItems === 1 ? "item" : "items"})
+            <h1 className="text-lg sm:text-2xl font-bold text-primary">
+              Shopping Cart ({cartItems.length} {cartItems.length === 1 ? "item" : "items"})
             </h1>
           </div>
 
@@ -117,7 +117,7 @@ export default function CartPage() {
                           </div>
                         )}
 
-                        <p className="text-xs sm:text-sm font-bold text-text-primary mt-1">
+                        <p className="text-xs sm:text-sm font-bold text-primary mt-1">
                           ৳{item.price}
                         </p>
                       </div>
@@ -159,7 +159,7 @@ export default function CartPage() {
 
                       {/* Subtotal & Remove Action */}
                       <div className="sm:col-span-3 flex items-center justify-end gap-2 sm:gap-3">
-                        <span className="text-xs sm:text-sm font-bold text-text-primary">
+                        <span className="text-xs sm:text-sm font-bold text-primary">
                           ৳{item.price * item.quantity}
                         </span>
                         <button
@@ -227,7 +227,7 @@ export default function CartPage() {
                   </span>
                 </div>
                 <hr className="border-ring/20 my-2" />
-                <div className="flex justify-between text-sm font-bold text-text-primary">
+                <div className="flex justify-between text-sm font-bold text-primary">
                   <span>Total Amount</span>
                   <span>৳{grandTotal.toFixed(2)}</span>
                 </div>
@@ -235,7 +235,7 @@ export default function CartPage() {
 
               <Link
                 href="/checkout"
-                className="hidden sm:block w-full bg-foreground text-text-secondary text-center py-3 rounded-lg font-bold uppercase tracking-wider text-xs hover:bg-gray-800 transition shadow-sm active:scale-[0.98]"
+                className="hidden sm:block w-full bg-primary text-text-secondary text-center py-3 rounded-lg font-bold uppercase tracking-wider text-xs hover:bg-gray-800 transition shadow-sm active:scale-[0.98]"
               >
                 Proceed to Checkout
               </Link>
@@ -246,7 +246,7 @@ export default function CartPage() {
 
       {/* Sticky Mobile Bottom Bar */}
       {cartItems.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-ring/20 p-3 sm:hidden z-40 shadow-lg flex items-center justify-between">
+        <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-ring/20 p-3 sm:hidden z-40  flex items-center justify-between">
           <div>
             <span className="text-[10px] text-ring uppercase font-semibold block">Total</span>
             <span className="text-base font-bold text-text-primary">৳{grandTotal.toFixed(0)}</span>
