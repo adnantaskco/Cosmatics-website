@@ -145,7 +145,7 @@ export default function ProductCard({
             <img
               src={product.image}
               alt={product.name}
-              className={`w-full h-full object-cover transition-all duration-500 ${
+              className={`w-full h-full  transition-all duration-500 ${
                 hasHoverImage
                   ? isTouched
                     ? "opacity-0"
@@ -159,7 +159,7 @@ export default function ProductCard({
               <img
                 src={product.image_variants.medium}
                 alt={`${product.name} alternate view`}
-                className={`w-full h-full object-cover absolute inset-0 transition-all duration-500 group-hover:scale-105 pointer-events-none ${
+                className={`w-full h-full  absolute inset-0 transition-all duration-500 group-hover:scale-105 pointer-events-none ${
                   isTouched
                     ? "opacity-100"
                     : "opacity-0 group-hover:opacity-100"
